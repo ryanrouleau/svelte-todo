@@ -1,16 +1,34 @@
 <ul>
   {#each $tasks as task}
-    <li >{ task.name }</li>
+    
+    <li transition:fly="{x: 400, duration: 500}">
+      <span style="text-decoration: {task.done ? 'line-through' : 'none'}">{ task.name }</span>
+      <button on:click="$toggleTask(task.id)">{ task.done ? 'undo complete' : 'complete' }</button>
+      <button on:click="$removeTask(task.id)">remove task</button>
+    </li>
   {/each}
 </ul>
 
+<style>
+li {
+  width: auto;
+}
+</style>
+
 <script>
+import { fade, fly } from 'svelte-transitions';
+
 export default {
 
   data () {
     return {
     }
-  }
+  },
+
+  transitions: { 
+    fade,
+    fly,
+  },
 
 }
 </script>

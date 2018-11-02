@@ -1,12 +1,19 @@
-<h1>wow a { message }</h1>
-<h2>youve got { $tasks.length } things to do</h2>
-<List {tasks} />
-<input bind:value=newtask>
-<button on:click="adddTask(newtask, $addTask)">add task</button>
+<div id="app">
+	<h1>wow a { message }</h1>
+	<h2>youve got { $tasks.length } things to do</h2>
+	<List {tasks} />
+	<form on:submit="addTask(event, newtask)">
+		<input bind:value=newtask>
+		<button>add task</button>
+	</form>
+</div>
 
 <style>
 	h1 {
 		color: purple;
+	}
+	#app {
+		width: 600px;
 	}
 </style>
 
@@ -23,7 +30,8 @@
 		},
 
 		methods: {
-			adddTask(newtask, addTaskToStore) {
+			addTask(event, newtask) {
+				event.preventDefault();
 				store.addTask(newtask);
 				this.set({ newtask: '' });
 			}
