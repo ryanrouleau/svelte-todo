@@ -18,6 +18,7 @@
     "dev": "webpack-dev-server --content-base public"
   },
   "dependencies": {
-    "svelte-extras": "^2.0.2"
+    "svelte-extras": "^2.0.2",
+    "svelte-transitions": "^1.2.0"
   }
 }

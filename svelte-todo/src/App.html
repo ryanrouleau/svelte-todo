@@ -1,11 +1,12 @@
 <div id="app">
 	<h1>wow a { message }</h1>
-	<h2>youve got { $tasks.length } things to do</h2>
-	<List {tasks} />
+	<h2>youve done { numTasksCompleted } of { numTasks } things to do</h2>
 	<form on:submit="addTask(event, newtask)">
 		<input bind:value=newtask>
 		<button>add task</button>
 	</form>
+	<List {tasks} />
+	<button on:click="$removeCompletedTasks()">remove all completed tasks</button>
 </div>
 
 <style>
@@ -34,7 +35,12 @@
 				event.preventDefault();
 				store.addTask(newtask);
 				this.set({ newtask: '' });
-			}
+			},
+		},
+
+		computed:  {
+			numTasksCompleted: ({ $tasks }) => $tasks.filter(task => task.done).length,
+			numTasks: ({ $tasks }) => $tasks.length,
 		},
 
 		components: {

@@ -1,4 +1,5 @@
 import { Store } from 'svelte/store.js';
+import { timingSafeEqual } from 'crypto';
 
 
 // helpers
@@ -38,7 +39,12 @@ class TodoStore extends Store {
 	removeTask(id) {
 		const tasks = this.get().tasks.filter(task => task.id !== id);
 		this.set({ tasks });
-	}
+  }
+  
+  removeCompletedTasks() {
+    const tasks = this.get().tasks.filter(task => !task.done);
+    this.set({ tasks });
+  }
 
 }
 
